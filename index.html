@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PosturePal — a posture reminder that learns your posture</title>
+<meta name="description" content="A free macOS posture reminder that calibrates to your body and camera. Runs entirely on your Mac; no images are saved and nothing is uploaded.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5c5c5c;
+    --rule: #e3e3e3;
+    --card: #f7f7f8;
+    --accent: #1c8c46;
+    --link: #0b6bcb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171a;
+      --fg: #e9e9ea;
+      --muted: #a2a3a7;
+      --rule: #2c2e33;
+      --card: #1e2024;
+      --accent: #46c07a;
+      --link: #6cb2ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 22px 90px; }
+  header { padding: 68px 0 30px; }
+  h1 { font-size: 2.5rem; line-height: 1.15; margin: 0 0 10px; letter-spacing: -0.02em; }
+  .tagline { font-size: 1.2rem; color: var(--muted); margin: 0 0 26px; }
+  h2 {
+    font-size: 1.4rem; margin: 52px 0 14px; padding-top: 22px;
+    border-top: 1px solid var(--rule); letter-spacing: -0.01em;
+  }
+  h3 { font-size: 1.05rem; margin: 28px 0 8px; }
+  p, li { color: var(--fg); }
+  .muted { color: var(--muted); }
+  a { color: var(--link); }
+  code {
+    font: 0.9em ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--card); padding: 2px 6px; border-radius: 5px;
+  }
+  .btn {
+    display: inline-block; background: var(--accent); color: #fff;
+    text-decoration: none; font-weight: 600; padding: 13px 26px;
+    border-radius: 10px;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .req { font-size: 0.92rem; color: var(--muted); margin-top: 12px; }
+  nav { font-size: 0.94rem; margin-top: 30px; }
+  nav a { margin-right: 18px; white-space: nowrap; }
+  .states {
+    display: flex; flex-wrap: wrap; gap: 22px; margin: 22px 0 8px; padding: 0; list-style: none;
+  }
+  .states li { width: 174px; }
+  .states img { width: 174px; height: auto; display: block; border-radius: 10px; }
+  .states span { display: block; font-size: 0.9rem; color: var(--muted); margin-top: 7px; }
+  figure { margin: 22px 0; }
+  figure img { max-width: 100%; border-radius: 12px; border: 1px solid var(--rule); }
+  figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 9px; }
+  ol li, ul li { margin-bottom: 9px; }
+  .callout {
+    background: var(--card); border-left: 3px solid var(--accent);
+    padding: 15px 18px; border-radius: 0 9px 9px 0; margin: 20px 0;
+  }
+  .callout p { margin: 0; }
+  footer {
+    margin-top: 60px; padding-top: 22px; border-top: 1px solid var(--rule);
+    font-size: 0.9rem; color: var(--muted);
+  }
+  table { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 0.95rem; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; }
+  .scroll { overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>PosturePal</h1>
+  <p class="tagline">A posture reminder that learns <em>your</em> posture, instead of
+  judging you against a generic idea of what good posture looks like.</p>
+  <p><a class="btn" href="https://github.com/4gopari/posturepalnew/releases/latest">Download for macOS</a></p>
+  <p class="req">Requires an Apple Silicon Mac (M1/M2/M3/M4) and a webcam. Free and open source.</p>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#install">Install</a>
+    <a href="#using">Using it</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#terms">Terms</a>
+  </nav>
+</header>
+
+<h2 id="how">What it does</h2>
+<p>PosturePal watches you through your webcam and catches the little ways your posture
+starts to break down — slouching in your chair, hunching toward the screen, letting
+your head creep too far forward, sitting too close to the display, or leaning onto one
+side of your chair until one shoulder sits noticeably higher than the other. A small
+coloured pill floats in the corner of your screen, and you get a notification if bad
+posture holds for more than a few seconds — naming everything it can see going wrong,
+not just one thing: <em>“keep shoulders flat and lift your chin”</em>, <em>“stop
+slouching, sit up and sit back from the screen”</em>.</p>
+
+<p>Most posture apps apply one fixed rule to everyone. Bodies and desks are not the
+same, so a threshold tuned on one person is wrong for the next. PosturePal spends
+about three minutes photographing you in a range of poses the first time you open it,
+then fits its measurements to <em>your</em> proportions and <em>your</em> camera
+position.</p>
+
+<h2 id="install">Installing</h2>
+<ol>
+  <li>Download the disk image and drag <strong>PosturePal</strong> onto your
+      Applications folder.</li>
+  <li>Open it from Applications.</li>
+  <li>Click <strong>OK</strong> when macOS asks for camera permission. The app cannot
+      work without it — it watches your posture through the webcam.</li>
+  <li>Turn on notifications, so PosturePal can tell you exactly what to fix and bring
+      you back to a good posture. Open <strong>System Settings → Notifications</strong>,
+      find <strong>terminal-notifier</strong> in the list, and switch
+      <strong>Allow notifications</strong> on.
+      <p class="muted" style="margin:6px 0 0">The entry is named terminal-notifier
+      rather than PosturePal because that is the macOS notification helper the app
+      delivers its alerts through.</p></li>
+</ol>
+
+<div class="callout">
+  <p>The app is signed and notarised by Apple, so it opens normally. If macOS ever
+  blocks it, right-click the app and choose <strong>Open</strong>.</p>
+</div>
+
+<h3>First run: a one-time setup, about three minutes</h3>
+<p>Do this at a proper desk and chair, sitting the way you would ideally want to sit
+throughout the day. PosturePal learns what good posture looks like from you, so the
+posture you use during calibration becomes its baseline. If you calibrate while
+slouching on a sofa or hunching over a laptop, PosturePal may treat that as “good”
+posture. For the best results, sit with your back supported, feet flat on the floor,
+your desk at a comfortable height, and your screen roughly at eye level.</p>
+<p>It guides you through 10 short takes, and two things matter:</p>
+<ul>
+  <li>During <strong>good posture</strong> takes, move around naturally — shift, turn,
+      reach for your mouse. Sitting frozen teaches it that any movement at all is bad
+      posture.</li>
+  <li>During <strong>bad posture</strong> takes, start subtle and build slowly to
+      extreme. The subtle part is what teaches it to catch real slouching rather than
+      only theatrical slouching.</li>
+</ul>
+<p class="muted">You can press ESC to skip setup, but the app then falls back to
+generic settings that work far less well. Each user account on a Mac gets its own
+calibration, so several people can share a machine.</p>
+
+<h2 id="using">Using it</h2>
+<p>The pill floats above everything and cannot be hidden behind the notch. Drag it
+anywhere you like; the ✕ quits the app.</p>
+
+<ul class="states">
+  <li><img src="img/pill-good.png" alt="Green pill reading Good"><span>Good posture</span></li>
+  <li><img src="img/pill-bad.png" alt="Red pill reading Bad"><span>Bad posture — sit up</span></li>
+  <li><img src="img/pill-unclear.png" alt="Yellow pill reading Move"><span>Too close to see you properly</span></li>
+  <li><img src="img/pill-away.png" alt="Grey pill reading Away"><span>Nobody at the desk</span></li>
+  <li><img src="img/pill-paused.png" alt="Dark pill reading Paused"><span>Paused — camera released</span></li>
+</ul>
+
+<h3>The menu</h3>
+<p>Right-click the pill for everything else.</p>
+
+<figure>
+  <img src="img/menu.png" alt="The PosturePal menu, showing Pause monitoring, Redo posture setup, Launch at login, Data policy and Quit">
+  <figcaption>The same menu also appears under the menu-bar icon, when macOS gives it room.</figcaption>
+</figure>
+
+<div class="scroll">
+<table>
+  <tr><th>Pause monitoring</th>
+      <td>Stops watching and <strong>releases the camera completely</strong>, so it is
+      free for a video call. Choose it again to resume.</td></tr>
+  <tr><th>Redo posture setup</th>
+      <td>Runs calibration again — worth doing if you change desk, chair or laptop
+      position.</td></tr>
+  <tr><th>Launch at login</th>
+      <td>Starts PosturePal automatically when you log in.</td></tr>
+  <tr><th>Data policy</th>
+      <td>A summary of what is on this page under Privacy.</td></tr>
+</table>
+</div>
+
+<h2 id="privacy">Privacy policy</h2>
+<p class="muted">Last updated 15 August 2026.</p>
+
+<p><strong>PosturePal runs entirely on your Mac.</strong> It has no accounts, no
+servers and no analytics.</p>
+
+<h3>What happens to camera images</h3>
+<p>Frames are read from the webcam, measured in memory, and discarded immediately.
+<strong>No photo or video is ever written to disk</strong> — not during monitoring and
+not during first-run calibration. What survives calibration is a set of numbers
+describing your proportions, never the pictures they came from.</p>
+
+<h3>What is stored, and where</h3>
+<div class="scroll">
+<table>
+  <tr><th><code>~/.posturepal/calibration.json</code></th>
+      <td>The measurements that describe your posture, and the thresholds fitted to
+      you. Numbers only.</td></tr>
+  <tr><th><code>~/.posturepal/status.json</code></th>
+      <td>The current reading (for example <code>Good</code>) and when it was last
+      updated, so the pill can display it.</td></tr>
+</table>
+</div>
+<p>Both live in your own home folder. Each user account has its own copy, and no
+account can read another's. Deleting the <code>~/.posturepal</code> folder erases
+everything PosturePal knows about you.</p>
+
+<h3>Network</h3>
+<p>PosturePal makes <strong>no network connections</strong>. The pose model runs
+locally and ships inside the app; nothing is uploaded, and the app does not check for
+updates or report usage. The third-party pose library it uses has usage analytics that
+are switched on by default, and PosturePal explicitly disables them.</p>
+
+<h3>Camera access</h3>
+<p>The camera is open only while monitoring is running. Pausing releases it, and macOS
+shows its camera indicator whenever any app — including this one — is watching.</p>
+
+<h3>Sharing</h3>
+<p>Nothing is shared with anyone, because nothing leaves your computer. There are no
+third-party services, trackers or advertisements.</p>
+
+<h2 id="terms">Terms of use</h2>
+<p class="muted">Last updated 15 August 2026.</p>
+
+<p>PosturePal is provided free of charge, as is, without warranty of any kind. By using
+it you accept the following.</p>
+
+<h3>Not a medical device</h3>
+<p>PosturePal is a reminder tool, not a medical product. It does not diagnose, treat or
+prevent any condition, and its readings are not medical advice. If you have pain or a
+health concern, speak to a qualified professional. Do not rely on this app as a
+substitute for one.</p>
+
+<h3>Getting the best results from it</h3>
+<p>PosturePal reads your posture from a camera image, so it works best when it can see
+you clearly: reasonable lighting, the camera at its usual position, and a calibration
+done carefully. Change your desk or move your laptop and it is worth running
+<strong>Redo posture setup</strong>, so its measurements match where you actually sit.</p>
+<p>It is a helpful second opinion rather than a perfect judge, and you remain the one
+who decides how you sit.</p>
+
+<h3>Liability</h3>
+<p>To the fullest extent permitted by law, the author is not liable for any damages
+arising from the use of this software.</p>
+
+<h3>Your responsibility</h3>
+<p>The camera sees whatever is in front of it. Please be considerate of other people in
+the room, and do not run PosturePal where recording would be inappropriate — even
+though no images are saved.</p>
+
+<h3>The software</h3>
+<p>The source code is public at
+<a href="https://github.com/4gopari/posturepalnew">github.com/4gopari/posturepalnew</a>.
+You may use and modify it for personal and educational purposes.</p>
+
+<footer>
+  <p>PosturePal — a student project. Built with YOLOv8-pose, running locally on your
+  Mac.<br>
+  Questions or problems:
+  <a href="https://github.com/4gopari/posturepalnew/issues">open an issue on GitHub</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>
