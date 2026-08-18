@@ -56,6 +56,9 @@
     border-radius: 10px;
   }
   .btn:hover { filter: brightness(1.08); }
+  .downloads { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn-alt { background: var(--card); color: var(--fg);
+    border: 1px solid var(--rule); }
   .req { font-size: 0.92rem; color: var(--muted); margin-top: 12px; }
   nav { font-size: 0.94rem; margin-top: 30px; }
   nav a { margin-right: 18px; white-space: nowrap; }
@@ -91,10 +94,15 @@
   <h1>PosturePal</h1>
   <p class="tagline">A posture reminder that learns <em>your</em> posture, instead of
   judging you against a generic idea of what good posture looks like.</p>
-  <p><a class="btn" href="https://github.com/4gopari/posturepal-site/releases/latest">Download for macOS</a></p>
-  <p class="req">Requires an Apple Silicon Mac (M1 or later), macOS 11 Big Sur or
-  newer, and a webcam. Check yours under  &rsaquo; About This Mac. Free, and
-  everything runs on your own machine.</p>
+  <p class="downloads">
+    <a class="btn" href="https://github.com/4gopari/posturepal-site/releases/download/v1.0/PosturePal.dmg">Download for Apple Silicon</a>
+    <a class="btn btn-alt" href="https://github.com/4gopari/posturepal-site/releases/download/v1.0/PosturePal-Intel.dmg">Download for Intel</a>
+  </p>
+  <p class="req">Requires macOS 11 Big Sur or newer and a webcam. Free, and
+  everything runs on your own machine.<br>
+  <strong>Not sure which one?</strong> Open  &rsaquo; About This Mac. If it says
+  <em>Chip</em> followed by M1, M2, M3 or M4, take Apple Silicon. If it says
+  <em>Processor</em> followed by Intel, take Intel.</p>
   <nav>
     <a href="#how">How it works</a>
     <a href="#install">Install</a>
